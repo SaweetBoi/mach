@@ -1,65 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MachineCo | Heavy Machinery</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MachineCo - Heavy Machinery</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-black text-white">
-
-  <!-- Navigation -->
-  <nav class="bg-black bg-opacity-70 fixed w-full top-0 z-50 backdrop-blur-lg">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="text-2xl font-extrabold tracking-wider">MachineCo</a>
-      <div class="space-x-6 hidden md:flex">
-        <a href="index.html" class="hover:text-gray-400 transition">Home</a>
-        <a href="#products" class="hover:text-gray-400 transition">Products</a>
-        <a href="about.html" class="hover:text-gray-400 transition">About</a>
-        <a href="contact.html" class="hover:text-gray-400 transition">Contact</a>
+<body class="bg-gray-50 text-gray-900">
+  <!-- Navbar -->
+  <nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold text-gray-800">MachineCo</a>
+      <div class="space-x-6">
+        <a href="index.html" class="hover:text-blue-600">Home</a>
+        <a href="about.html" class="hover:text-blue-600">About Us</a>
+        <a href="contact.html" class="hover:text-blue-600">Contact</a>
       </div>
     </div>
   </nav>
-  <div class="pt-20"></div>
 
   <!-- Hero -->
-  <header class="relative h-screen flex items-center justify-center text-center bg-cover bg-center"
-    style="background-image: url('https://images.unsplash.com/photo-1581091215367-59ab6d1539a7?auto=format&fit=crop&w=1600&q=80');">
-    <div class="absolute inset-0 bg-black bg-opacity-70"></div>
-    <div class="relative z-10 max-w-3xl">
-      <h1 class="text-5xl font-extrabold mb-6">Powering the Future of Industry</h1>
-      <p class="text-xl text-gray-300 mb-8">Reliable heavy machinery built for performance, durability, and innovation.</p>
-      <a href="#products" class="px-8 py-4 bg-yellow-500 text-black font-bold rounded-lg hover:bg-yellow-400 transition">
-        Explore Products
-      </a>
-    </div>
-  </header>
+  <section class="bg-gray-900 text-white py-24 text-center">
+    <h1 class="text-5xl font-extrabold mb-4">Powerful Machines, Built to Last</h1>
+    <p class="text-lg text-gray-300 max-w-2xl mx-auto">
+      Explore our catalog of heavy-duty industrial machines designed for performance and durability.
+    </p>
+  </section>
 
-  <!-- Products -->
-  <section id="products" class="max-w-7xl mx-auto px-6 py-20">
-    <h2 class="text-4xl font-bold text-center mb-12">Our Machines</h2>
-    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10"></div>
+  <!-- Product Grid -->
+  <section class="py-16 max-w-7xl mx-auto px-4">
+    <h2 class="text-3xl font-bold mb-8 text-center">Our Products</h2>
+    <div id="product-grid" class="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"></div>
   </section>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-400 text-center py-8 mt-20">
+  <footer class="bg-gray-900 text-gray-300 py-8 text-center">
     <p>&copy; 2025 MachineCo. All rights reserved.</p>
-    <p>Email: contact@machineco.com | Phone: +91-98765-43210</p>
   </footer>
 
-  <!-- Scripts -->
   <script src="product.js"></script>
   <script>
     const grid = document.getElementById("product-grid");
-    Object.entries(products).forEach(([id, product]) => {
+    Object.keys(products).forEach(key => {
+      const p = products[key];
       const card = document.createElement("a");
-      card.href = `product.html?id=${id}`;
-      card.className = "bg-gray-800 rounded-lg overflow-hidden shadow-lg hover:scale-105 transition block";
+      card.href = `product.html?id=${key}`;
+      card.className = "bg-white rounded-lg shadow hover:shadow-lg transition block";
       card.innerHTML = `
-        <img src="${product.image}" alt="${product.name}" class="w-full h-56 object-cover">
-        <div class="p-6">
-          <h3 class="text-2xl font-bold mb-2">${product.name}</h3>
-          <p class="text-gray-400 text-sm">${product.description.substring(0, 100)}...</p>
+        <img src="${p.image}" alt="${p.name}" class="w-full h-48 object-cover rounded-t-lg">
+        <div class="p-4">
+          <h3 class="text-lg font-semibold">${p.name}</h3>
+          <p class="text-gray-600 text-sm">${p.description}</p>
         </div>
       `;
       grid.appendChild(card);
