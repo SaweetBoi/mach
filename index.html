@@ -1,147 +1,121 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>MachineCo — Industrial Machines</title>
-
-  <!-- Tailwind (CDN) -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MachineCo | Industrial Machinery</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    /* Smooth fade-in for hero */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1.2s ease-out forwards;
+    }
+    .fade-in-delay {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1.2s ease-out forwards;
+      animation-delay: 0.5s;
+    }
+    .fade-in-delay-2 {
+      opacity: 0;
+      transform: translateY(30px);
+      animation: fadeInUp 1.2s ease-out forwards;
+      animation-delay: 1s;
+    }
+    @keyframes fadeInUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
 
-  <!-- AOS (Animations on Scroll) -->
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
-
-  <!-- GSAP -->
-  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
-
-  <!-- Custom CSS -->
-  <link rel="stylesheet" href="style.css" />
-  
-  <!-- Main product & renderer script (defers execution) -->
-  <script src="script.js" defer></script>
+    /* Navbar hide on top, reveal on scroll */
+    .navbar-hidden {
+      transform: translateY(-100%);
+      transition: transform 0.4s ease-in-out;
+    }
+    .navbar-visible {
+      transform: translateY(0);
+      transition: transform 0.4s ease-in-out;
+    }
+  </style>
 </head>
-<body class="antialiased text-gray-900 bg-white">
+<body class="bg-black text-white font-sans">
 
-  <!-- NAVBAR -->
-  <header class="fixed w-full top-0 z-50 bg-white/60 backdrop-blur border-b border-gray-100">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
-      <a class="inline-flex items-center gap-3" href="index.html">
-        <img src="images/logo-placeholder.png" alt="MachineCo" class="h-8 w-8 object-contain">
-        <span class="font-semibold text-lg">MachineCo</span>
-      </a>
-
-      <nav class="hidden md:flex gap-8 items-center text-sm font-medium">
-        <a href="#home" class="hover:text-orange-500 transition">Home</a>
-        <a href="#products" class="hover:text-orange-500 transition">Products</a>
-        <a href="#about" class="hover:text-orange-500 transition">About</a>
-        <a href="#contact" class="hover:text-orange-500 transition">Contact</a>
+  <!-- Navbar -->
+  <header id="navbar" class="navbar-hidden fixed w-full bg-black bg-opacity-90 backdrop-blur-md z-50 shadow-md">
+    <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
+      <h1 class="text-2xl font-bold">MachineCo</h1>
+      <nav class="space-x-6 text-gray-300">
+        <a href="index.html" class="hover:text-white transition">Home</a>
+        <a href="#products" class="hover:text-white transition">Products</a>
+        <a href="#about" class="hover:text-white transition">About</a>
+        <a href="#contact" class="hover:text-white transition">Contact</a>
       </nav>
-
-      <!-- mobile menu button (no JS menu here, simple) -->
-      <div class="md:hidden text-gray-700">☰</div>
     </div>
   </header>
 
-  <!-- HERO -->
-  <section id="home" class="relative hero-min h-screen flex items-center justify-center">
-    <div class="absolute inset-0 hero-overlay"></div>
-    <div class="relative z-10 max-w-4xl text-center px-6">
-      <h1 class="text-4xl md:text-6xl font-extrabold leading-tight text-white opacity-0" id="hero-title">
-        Heavy Machinery, refined.
-      </h1>
-      <p class="mt-6 text-lg md:text-xl text-gray-200 max-w-2xl mx-auto opacity-0" id="hero-sub">
-        Precision-engineered forklifts, loaders and construction equipment — built to last, designed to streamline.
-      </p>
-      <div class="mt-10 opacity-0" id="hero-cta">
-        <a href="#products" class="inline-block bg-white text-gray-900 px-8 py-3 rounded-full shadow-lg hover:translate-y-[-3px] transition">
-          Explore Products
-        </a>
-      </div>
+  <!-- Hero -->
+  <section class="relative h-[90vh] flex flex-col items-center justify-center text-center bg-cover bg-center" 
+           style="background-image: url('https://images.unsplash.com/photo-1581091870627-3b2f1e0eec7f?auto=format&fit=crop&w=1600&q=80');">
+    <div class="absolute inset-0 bg-black bg-opacity-70"></div>
+    <div class="relative z-10 px-4">
+      <h2 class="text-5xl md:text-6xl font-extrabold mb-6 fade-in">Powering Industries with Precision</h2>
+      <p class="text-lg md:text-xl text-gray-300 mb-8 fade-in-delay">High-performance machinery engineered for tomorrow’s challenges.</p>
+      <a href="#products" class="bg-white text-black px-6 py-3 rounded-xl text-lg font-semibold hover:bg-gray-300 transition fade-in-delay-2">Explore Products</a>
     </div>
-    <!-- faint decorative machine silhouette (optional) -->
   </section>
 
-  <!-- PRODUCTS GRID -->
-  <section id="products" class="max-w-7xl mx-auto px-6 py-20">
-    <h2 class="text-3xl md:text-4xl font-bold text-center mb-8" data-aos="fade-up">Our Machines</h2>
-    <p class="text-center text-gray-600 max-w-2xl mx-auto mb-12" data-aos="fade-up" data-aos-delay="100">
-      A curated selection of heavy equipment engineered for performance and longevity.
+  <!-- Products -->
+  <main id="products" class="max-w-7xl mx-auto p-8">
+    <h2 class="text-4xl font-bold mb-12 text-center" data-aos="fade-up">Our Products</h2>
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
+      <!-- (keep your product cards here, same as before) -->
+    </div>
+  </main>
+
+  <!-- About -->
+  <section id="about" class="max-w-5xl mx-auto p-12 text-center" data-aos="fade-up">
+    <h2 class="text-3xl font-bold mb-4">About Us</h2>
+    <p class="text-gray-400 leading-relaxed">
+      At MachineCo, we engineer industrial machines that push the limits of performance and reliability. 
+      Our mission is to empower industries with tools that transform the way they build, move, and innovate.
     </p>
-
-    <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- JS will render product cards here from products data -->
-    </div>
   </section>
 
-  <!-- ABOUT -->
-  <section id="about" class="bg-gray-50 py-20">
-    <div class="max-w-4xl mx-auto px-6 text-center" data-aos="fade-up">
-      <h3 class="text-2xl md:text-3xl font-bold mb-4">About MachineCo</h3>
-      <p class="text-gray-700">MachineCo has been designing and manufacturing industrial machines for over 20 years. Our products combine durability, safety and modern engineering to deliver measurable uptime for your operations.</p>
-    </div>
+  <!-- Contact -->
+  <section id="contact" class="max-w-5xl mx-auto p-12 text-center" data-aos="fade-up">
+    <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
+    <p class="text-gray-400 mb-6">Have questions or need custom machinery? Let’s talk.</p>
+    <a href="mailto:info@machineco.com" class="bg-white text-black px-6 py-3 rounded-xl text-lg font-semibold hover:bg-gray-300 transition">Email Us</a>
   </section>
 
-  <!-- CONTACT -->
-  <section id="contact" class="py-16 max-w-4xl mx-auto px-6">
-    <h3 class="text-2xl md:text-3xl font-bold text-center mb-6" data-aos="fade-up">Contact Us</h3>
-    <form class="bg-white shadow rounded-lg p-8 grid gap-4" data-aos="fade-up" data-aos-delay="100" onsubmit="event.preventDefault(); alert('Message sent (demo)')">
-      <input class="border rounded p-3" type="text" placeholder="Your name" required>
-      <input class="border rounded p-3" type="email" placeholder="Your email" required>
-      <textarea class="border rounded p-3" rows="5" placeholder="Your message" required></textarea>
-      <div class="flex justify-center">
-        <button class="bg-gray-900 text-white px-6 py-3 rounded-lg hover:bg-orange-500 transition">Send Message</button>
-      </div>
-    </form>
-  </section>
-
-  <!-- FOOTER -->
-  <footer class="bg-gray-900 text-gray-300 py-8 mt-12">
-    <div class="max-w-7xl mx-auto px-6 text-center">
-      <div class="mb-4">© <span id="year"></span> MachineCo</div>
-      <div class="text-sm">Designed for demo — replace content/images with real assets.</div>
-    </div>
+  <!-- Footer -->
+  <footer class="bg-gray-900 py-6 mt-12 text-center text-gray-500 text-sm">
+    © 2025 MachineCo. All rights reserved.
   </footer>
 
-  <!-- AOS init + GSAP hero animation + render index -->
+  <!-- Scripts -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
-    // Wait until script.js defines "products" and helper functions
-    document.addEventListener('DOMContentLoaded', () => {
-      // year
-      document.getElementById('year').textContent = new Date().getFullYear();
+    AOS.init();
 
-      // Initialize AOS when available (script.js will also init)
-      if (window.AOS) AOS.init({ duration: 900, once: true });
+    // Navbar scroll reveal
+    const navbar = document.getElementById('navbar');
+    let lastScrollY = 0;
 
-      // Hero GSAP entrance (wait for gsap)
-      function heroIn() {
-        if (window.gsap) {
-          gsap.fromTo('#hero-title',{y:30, opacity:0},{y:0, opacity:1, duration:1, ease:'power3.out'});
-          gsap.fromTo('#hero-sub',{y:30, opacity:0},{y:0, opacity:1, duration:1, delay:0.25, ease:'power3.out'});
-          gsap.fromTo('#hero-cta',{y:20, opacity:0},{y:0, opacity:1, duration:1, delay:0.5, ease:'power3.out'});
-        } else {
-          // fallback: simple reveal
-          document.getElementById('hero-title').style.opacity = 1;
-          document.getElementById('hero-sub').style.opacity = 1;
-          document.getElementById('hero-cta').style.opacity = 1;
-        }
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 50) {
+        navbar.classList.remove('navbar-hidden');
+        navbar.classList.add('navbar-visible');
+      } else {
+        navbar.classList.remove('navbar-visible');
+        navbar.classList.add('navbar-hidden');
       }
-
-      // Poll for gsap and products defined in script.js
-      const start = Date.now();
-      const iv = setInterval(() => {
-        if (window.products && window.renderIndex) {
-          clearInterval(iv);
-          renderIndex();   // populate grid
-          heroIn();
-          if (window.AOS) AOS.refresh();
-        } else if (Date.now() - start > 4000) {
-          clearInterval(iv);
-          // still try to render if products exist
-          if (window.products && window.renderIndex) renderIndex();
-          heroIn();
-        }
-      }, 100);
+      lastScrollY = window.scrollY;
     });
   </script>
 </body>
