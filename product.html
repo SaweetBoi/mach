@@ -5,68 +5,107 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Product Details | MachineCo</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <script src="product.js"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <style>
+    /* Sticky CTA animation */
+    #stickyCTA {
+      transition: transform 0.3s ease;
+    }
+    #stickyCTA:hover {
+      transform: scale(1.1);
+    }
+  </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-gray-100">
+<body class="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-gray-100 transition-colors duration-500" id="body">
 
   <!-- Navbar -->
   <nav class="bg-gray-900 bg-opacity-90 fixed w-full z-20">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <a href="index.html" class="text-2xl font-bold text-white">MachineCo</a>
-      <div class="space-x-6">
+      <div class="space-x-6 flex items-center">
         <a href="index.html" class="hover:text-blue-400">Home</a>
         <a href="products.html" class="hover:text-blue-400">Products</a>
         <a href="contact.html" class="hover:text-blue-400">Contact</a>
+        <!-- Dark/Light toggle -->
+        <button id="toggleTheme" class="ml-4 bg-gray-700 px-3 py-1 rounded text-sm">🌙</button>
       </div>
     </div>
   </nav>
 
   <!-- Product Details -->
-  <main class="max-w-6xl mx-auto px-6 py-32">
+  <main class="max-w-5xl mx-auto px-6 py-32">
     <div id="productDetails" class="text-center"></div>
   </main>
 
-  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-  <script>
-    AOS.init();
+  <!-- Sticky Enquiry CTA -->
+  <button id="stickyCTA" 
+    class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-full shadow-lg font-bold">
+    Enquire
+  </button>
 
+  <script>
     const params = new URLSearchParams(window.location.search);
     const productId = params.get("id");
     const product = products[productId];
 
     if (product) {
-      let specsHtml = `
-        <h2 class="text-2xl font-semibold mb-6">Specifications</h2>
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
+      const highlights = `
+        <div class="swiper mySwiper mb-12">
+          <div class="swiper-wrapper">
+            <div class="swiper-slide bg-gray-800 p-6 rounded-lg">⚡ Heavy Duty Build</div>
+            <div class="swiper-slide bg-gray-800 p-6 rounded-lg">⛽ Fuel Efficient</div>
+            <div class="swiper-slide bg-gray-800 p-6 rounded-lg">🧠 Smart Controls</div>
+            <div class="swiper-slide bg-gray-800 p-6 rounded-lg">🔧 Easy Maintenance</div>
+            <div class="swiper-slide bg-gray-800 p-6 rounded-lg">🌍 Eco Friendly</div>
+          </div>
+        </div>
       `;
 
-      product.specs.forEach((spec, i) => {
-        specsHtml += `
-          <div data-aos="fade-up" data-aos-delay="${i * 100}" 
-               class="bg-gray-800 p-4 rounded-lg shadow hover:shadow-xl transition">
-            <p class="text-blue-400 font-bold">${spec.label}</p>
-            <p class="text-lg">${spec.value}</p>
-          </div>
-        `;
-      });
-
-      specsHtml += `</div>`;
+      const specs = `
+        <ul class="text-left list-disc list-inside space-y-2 mb-8" id="specList">
+          <li><strong>Power:</strong> ${Math.floor(Math.random() * 500) + 100} HP</li>
+          <li><strong>Weight:</strong> ${Math.floor(Math.random() * 30) + 10} tons</li>
+          <li><strong>Fuel Type:</strong> Diesel</li>
+          <li><strong>Capacity:</strong> ${Math.floor(Math.random() * 20) + 5} m³</li>
+          <li><strong>Max Reach:</strong> ${Math.floor(Math.random() * 15) + 5} m</li>
+          <li><strong>Warranty:</strong> 5 years</li>
+        </ul>
+      `;
 
       document.getElementById("productDetails").innerHTML = `
         <h1 class="text-4xl font-extrabold mb-6">${product.name}</h1>
-        <img src="${product.image}" alt="${product.name}" 
-             class="w-full max-w-3xl mx-auto rounded-lg shadow-lg mb-6" data-aos="zoom-in">
-        <p class="text-lg text-gray-300 mb-8">${product.description}</p>
-        ${specsHtml}
-        <div class="mt-8">
-          <button id="enquireBtn" 
-            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
-            Enquire about this product
-          </button>
 
-          <!-- Hidden enquiry form -->
-          <div id="enquiryForm" class="mt-6 hidden">
+        <!-- Hero Video / Image -->
+        <div class="mb-8">
+          <video autoplay muted loop playsinline class="w-full max-w-3xl mx-auto rounded-lg shadow-lg">
+            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+            <img src="${product.image}" alt="${product.name}" class="w-full rounded-lg shadow-lg">
+          </video>
+        </div>
+
+        <p class="text-lg text-gray-300 mb-8">${product.description}</p>
+
+        <!-- Highlights Carousel -->
+        <h2 class="text-2xl font-semibold mb-4">Highlights</h2>
+        ${highlights}
+
+        <!-- Specifications -->
+        <h2 class="text-2xl font-semibold mb-4">Specifications</h2>
+        ${specs}
+
+        <!-- Buttons -->
+        <div class="flex flex-wrap justify-center gap-4 mb-12">
+          <button id="downloadBrochure" class="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg text-white font-semibold">
+            📄 Download Brochure
+          </button>
+        </div>
+
+        <!-- Enquiry Form -->
+        <div class="mt-8">
+          <div id="enquiryForm" class="mt-6">
             <form id="enquiryFormElement" class="bg-gray-800 p-6 rounded-lg space-y-4 shadow-xl">
               <h3 class="text-xl font-bold">Send us your enquiry</h3>
               <input type="hidden" id="productName" name="productName" value="${product.name}">
@@ -95,16 +134,63 @@
         </div>
       `;
 
-      // Toggle enquiry form
-      document.getElementById("enquireBtn").addEventListener("click", () => {
-        document.getElementById("enquiryForm").classList.toggle("hidden");
+      // Init Swiper
+      new Swiper(".mySwiper", {
+        slidesPerView: 1.5,
+        spaceBetween: 20,
+        centeredSlides: true,
+        loop: true,
+        autoplay: { delay: 3000 },
+        breakpoints: {
+          640: { slidesPerView: 2.5 },
+          1024: { slidesPerView: 3.5 }
+        }
       });
 
-      // Handle form submission
+      // Sticky CTA → scroll to form
+      document.getElementById("stickyCTA").addEventListener("click", () => {
+        document.getElementById("enquiryForm").scrollIntoView({ behavior: "smooth" });
+      });
+
+      // Handle form
       document.getElementById("enquiryFormElement").addEventListener("submit", (e) => {
         e.preventDefault();
         alert("✅ Thank you! Your enquiry for " + product.name + " has been sent.");
-        document.getElementById("enquiryForm").classList.add("hidden");
+      });
+
+      // Dark/Light mode toggle
+      document.getElementById("toggleTheme").addEventListener("click", () => {
+        const body = document.getElementById("body");
+        if (body.classList.contains("bg-gradient-to-br")) {
+          body.classList.remove("bg-gradient-to-br", "from-gray-900", "via-black", "to-gray-800", "text-gray-100");
+          body.classList.add("bg-white", "text-gray-900");
+        } else {
+          body.classList.add("bg-gradient-to-br", "from-gray-900", "via-black", "to-gray-800", "text-gray-100");
+          body.classList.remove("bg-white", "text-gray-900");
+        }
+      });
+
+      // Download Brochure
+      document.getElementById("downloadBrochure").addEventListener("click", () => {
+        const { jsPDF } = window.jspdf;
+        const doc = new jsPDF();
+
+        doc.setFontSize(20);
+        doc.text(product.name + " - Product Brochure", 20, 20);
+
+        doc.setFontSize(12);
+        doc.text("Description:", 20, 40);
+        doc.text(product.description, 20, 50, { maxWidth: 170 });
+
+        doc.text("Specifications:", 20, 80);
+        const specsList = document.querySelectorAll("#specList li");
+        let y = 90;
+        specsList.forEach((spec) => {
+          doc.text("• " + spec.innerText, 25, y);
+          y += 10;
+        });
+
+        doc.save(product.name.replace(/\s+/g, "_") + "_brochure.pdf");
       });
     } else {
       document.getElementById("productDetails").innerHTML = `
