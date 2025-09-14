@@ -3,34 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>MachineCo Product</title>
+  <title>Product - MachineCo</title>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-100">
   <!-- Navbar -->
-  <nav class="bg-white shadow sticky top-0 z-50">
+  <nav class="bg-black/70 backdrop-blur sticky top-0 z-50">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="index.html" class="text-2xl font-bold text-gray-800">MachineCo</a>
+      <a href="index.html" class="text-2xl font-bold text-white">MachineCo</a>
       <div class="space-x-6">
-        <a href="index.html" class="hover:text-blue-600">Home</a>
-        <a href="about.html" class="hover:text-blue-600">About Us</a>
-        <a href="contact.html" class="hover:text-blue-600">Contact</a>
+        <a href="index.html" class="hover:text-blue-400">Home</a>
+        <a href="about.html" class="hover:text-blue-400">About Us</a>
+        <a href="contact.html" class="hover:text-blue-400">Contact</a>
       </div>
     </div>
   </nav>
 
   <!-- Product Detail -->
-  <main class="max-w-5xl mx-auto px-4 py-16">
-    <div id="product-detail" class="bg-white rounded-lg shadow-lg p-8"></div>
+  <main class="max-w-5xl mx-auto px-4 py-20">
+    <div id="product-detail" class="bg-gray-800 rounded-lg shadow-lg p-8" data-aos="fade-up"></div>
   </main>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-300 py-8 text-center">
+  <footer class="bg-black text-gray-400 py-8 text-center" data-aos="fade-up">
     <p>&copy; 2025 MachineCo. All rights reserved.</p>
   </footer>
 
   <script src="product.js"></script>
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
+    AOS.init({ duration: 1000, once: true });
+
     const params = new URLSearchParams(window.location.search);
     const id = params.get("id");
     const container = document.getElementById("product-detail");
@@ -38,13 +42,13 @@
     if (id && products[id]) {
       const p = products[id];
       container.innerHTML = `
-        <h1 class="text-3xl font-bold mb-4">${p.name}</h1>
+        <h1 class="text-4xl font-bold mb-6">${p.name}</h1>
         <img src="${p.image}" alt="${p.name}" class="w-full h-96 object-cover rounded mb-6">
-        <p class="text-gray-700 mb-4">${p.description}</p>
+        <p class="text-gray-300 mb-6">${p.description}</p>
         <a href="contact.html" class="inline-block bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Enquire Now</a>
       `;
     } else {
-      container.innerHTML = `<p class="text-red-600">Product not found.</p>`;
+      container.innerHTML = `<p class="text-red-400">Product not found.</p>`;
     }
   </script>
 </body>
