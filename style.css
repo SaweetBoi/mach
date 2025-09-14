@@ -1,16 +1,38 @@
-/* Custom styles + subtle transitions */
-html {
-  scroll-behavior: smooth;
+/* style.css — small Apple-like polish */
+
+/* HERO background:
+   Replace 'hero-bg.jpg' with a large hero image in /images/hero-bg.jpg
+   or change to a solid color if you prefer. */
+.hero-min {
+  background-image: linear-gradient(180deg, rgba(5,6,8,0.45), rgba(5,6,8,0.45)), url('images/hero-bg.jpg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
-section {
-  transition: all 0.6s ease-in-out;
+/* subtle overlay for hero to ensure contrast */
+.hero-overlay {
+  background: linear-gradient(180deg, rgba(0,0,0,0.35), rgba(0,0,0,0.55));
 }
 
-nav a {
-  transition: color 0.3s ease;
+/* product image hover zoom */
+.product-card-img {
+  transition: transform .6s cubic-bezier(.2,.9,.2,1), filter .4s;
+  will-change: transform;
+}
+.product-card:hover .product-card-img {
+  transform: scale(1.05);
 }
 
-nav a:hover {
-  color: #2563eb; /* Tailwind blue-600 */
+/* gentle shadow + rounded aesthetic */
+.rounded-2xl { border-radius: 1rem; }
+
+/* small utility to create fade-in when script adds class */
+.opacity-0 { opacity: 0; }
+.translate-y-6 { transform: translateY(1.5rem); }
+.transition { transition: all .6s cubic-bezier(.2,.9,.2,1); }
+
+/* small responsive tweaks */
+@media (max-width: 768px) {
+  .hero-min { padding-top: 6rem; }
 }
