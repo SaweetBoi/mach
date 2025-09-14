@@ -1,202 +1,182 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Details | MachineCo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product - MachineCo</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-  <script src="product.js"></script>
   <style>
-    /* Sticky CTA animation */
-    #stickyCTA {
-      transition: transform 0.3s ease;
+    /* Parallax hero scroll effect */
+    .parallax-bg {
+      transform: translateY(var(--scroll, 0));
+      transition: transform 0.1s linear;
     }
-    #stickyCTA:hover {
-      transform: scale(1.1);
+    .fade-zoom {
+      opacity: 0;
+      transform: scale(0.95);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .fade-zoom.visible {
+      opacity: 1;
+      transform: scale(1);
     }
   </style>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-gray-100 transition-colors duration-500" id="body">
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
 
   <!-- Navbar -->
-  <nav class="bg-gray-900 bg-opacity-90 fixed w-full z-20">
+  <nav class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md fixed w-full top-0 z-50 shadow">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="text-2xl font-bold text-white">MachineCo</a>
-      <div class="space-x-6 flex items-center">
-        <a href="index.html" class="hover:text-blue-400">Home</a>
-        <a href="products.html" class="hover:text-blue-400">Products</a>
-        <a href="contact.html" class="hover:text-blue-400">Contact</a>
-        <!-- Dark/Light toggle -->
-        <button id="toggleTheme" class="ml-4 bg-gray-700 px-3 py-1 rounded text-sm">🌙</button>
-      </div>
+      <h1 class="text-2xl font-bold text-blue-600">MachineCo</h1>
+      <a href="products.html" class="text-gray-700 dark:text-gray-200 hover:text-blue-600">Back to Products</a>
     </div>
   </nav>
 
-  <!-- Product Details -->
-  <main class="max-w-5xl mx-auto px-6 py-32">
-    <div id="productDetails" class="text-center"></div>
-  </main>
+  <!-- Hero Section -->
+  <section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+    <div id="heroBackground" class="absolute inset-0 w-full h-full parallax-bg"></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div id="heroContent" class="relative z-10 max-w-3xl px-6" data-aos="fade-up">
+      <h2 id="productName" class="text-4xl md:text-6xl font-bold text-white mb-6"></h2>
+      <p id="productDescription" class="text-lg text-gray-200 opacity-90 mb-8"></p>
+      <div class="space-x-4">
+        <button id="enquireNow" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
+          Enquire Now
+        </button>
+        <button id="downloadBrochure" class="px-6 py-3 bg-white/90 text-gray-900 font-semibold rounded-lg hover:bg-gray-200 transition">
+          Download Brochure
+        </button>
+      </div>
+    </div>
+  </section>
 
-  <!-- Sticky Enquiry CTA -->
-  <button id="stickyCTA" 
-    class="fixed bottom-6 right-6 bg-blue-600 hover:bg-blue-700 text-white px-6 py-4 rounded-full shadow-lg font-bold">
-    Enquire
-  </button>
+  <!-- Specifications -->
+  <section id="specSection" class="py-20 bg-white dark:bg-gray-800 fade-zoom">
+    <div class="max-w-6xl mx-auto px-6">
+      <h3 class="text-3xl font-bold mb-12 text-center">Specifications</h3>
+      <ul id="specList" class="grid md:grid-cols-2 gap-10">
+        <!-- Specs will be injected dynamically -->
+      </ul>
+    </div>
+  </section>
 
+  <!-- Highlights Carousel -->
+  <section class="py-20 bg-gray-100 dark:bg-gray-700 fade-zoom">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold mb-12">Key Highlights</h3>
+      <div class="flex overflow-x-auto space-x-6 snap-x snap-mandatory pb-4">
+        <div class="min-w-[250px] bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 snap-center">
+          <h4 class="font-semibold text-xl mb-2">Heavy-Duty Build</h4>
+          <p>Durable steel frame and components designed for industrial strength.</p>
+        </div>
+        <div class="min-w-[250px] bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 snap-center">
+          <h4 class="font-semibold text-xl mb-2">Fuel Efficient</h4>
+          <p>Smart engine system reduces fuel consumption by 15%.</p>
+        </div>
+        <div class="min-w-[250px] bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 snap-center">
+          <h4 class="font-semibold text-xl mb-2">Smart Controls</h4>
+          <p>Intuitive digital control panel with real-time diagnostics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enquiry Form -->
+  <section id="enquiryForm" class="py-20 bg-gray-200 dark:bg-gray-800 fade-zoom">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-8">Enquire About This Product</h2>
+      <form class="space-y-6 bg-white dark:bg-gray-900 shadow-lg p-8 rounded-lg">
+        <input type="text" placeholder="Your Name" class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-600" required>
+        <input type="email" placeholder="Your Email" class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-600" required>
+        <input id="productField" type="text" readonly class="w-full p-4 border rounded-lg bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" />
+        <textarea placeholder="Your Message" class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-600" rows="5"></textarea>
+        <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
+          Send Enquiry
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <script src="product.js"></script>
   <script>
+    AOS.init();
+
     const params = new URLSearchParams(window.location.search);
-    const productId = params.get("id");
-    const product = products[productId];
+    const key = params.get("id");
+    const product = products[key];
 
     if (product) {
-      const highlights = `
-        <div class="swiper mySwiper mb-12">
-          <div class="swiper-wrapper">
-            <div class="swiper-slide bg-gray-800 p-6 rounded-lg">⚡ Heavy Duty Build</div>
-            <div class="swiper-slide bg-gray-800 p-6 rounded-lg">⛽ Fuel Efficient</div>
-            <div class="swiper-slide bg-gray-800 p-6 rounded-lg">🧠 Smart Controls</div>
-            <div class="swiper-slide bg-gray-800 p-6 rounded-lg">🔧 Easy Maintenance</div>
-            <div class="swiper-slide bg-gray-800 p-6 rounded-lg">🌍 Eco Friendly</div>
-          </div>
-        </div>
-      `;
+      document.getElementById("productName").textContent = product.name;
+      document.getElementById("productDescription").textContent = product.description;
+      document.getElementById("productField").value = "Product: " + product.name;
 
-      const specs = `
-        <ul class="text-left list-disc list-inside space-y-2 mb-8" id="specList">
-          <li><strong>Power:</strong> ${Math.floor(Math.random() * 500) + 100} HP</li>
-          <li><strong>Weight:</strong> ${Math.floor(Math.random() * 30) + 10} tons</li>
-          <li><strong>Fuel Type:</strong> Diesel</li>
-          <li><strong>Capacity:</strong> ${Math.floor(Math.random() * 20) + 5} m³</li>
-          <li><strong>Max Reach:</strong> ${Math.floor(Math.random() * 15) + 5} m</li>
-          <li><strong>Warranty:</strong> 5 years</li>
-        </ul>
-      `;
+      const heroBg = document.getElementById("heroBackground");
+      if (product.video) {
+        heroBg.innerHTML = `
+          <video autoplay muted loop playsinline class="w-full h-full object-cover">
+            <source src="${product.video}" type="video/mp4">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+          </video>`;
+      } else {
+        heroBg.innerHTML = `<img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">`;
+      }
 
-      document.getElementById("productDetails").innerHTML = `
-        <h1 class="text-4xl font-extrabold mb-6">${product.name}</h1>
-
-        <!-- Hero Video / Image -->
-        <div class="mb-8">
-          <video autoplay muted loop playsinline class="w-full max-w-3xl mx-auto rounded-lg shadow-lg">
-            <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
-            <img src="${product.image}" alt="${product.name}" class="w-full rounded-lg shadow-lg">
-          </video>
-        </div>
-
-        <p class="text-lg text-gray-300 mb-8">${product.description}</p>
-
-        <!-- Highlights Carousel -->
-        <h2 class="text-2xl font-semibold mb-4">Highlights</h2>
-        ${highlights}
-
-        <!-- Specifications -->
-        <h2 class="text-2xl font-semibold mb-4">Specifications</h2>
-        ${specs}
-
-        <!-- Buttons -->
-        <div class="flex flex-wrap justify-center gap-4 mb-12">
-          <button id="downloadBrochure" class="bg-purple-600 hover:bg-purple-700 px-6 py-3 rounded-lg text-white font-semibold">
-            📄 Download Brochure
-          </button>
-        </div>
-
-        <!-- Enquiry Form -->
-        <div class="mt-8">
-          <div id="enquiryForm" class="mt-6">
-            <form id="enquiryFormElement" class="bg-gray-800 p-6 rounded-lg space-y-4 shadow-xl">
-              <h3 class="text-xl font-bold">Send us your enquiry</h3>
-              <input type="hidden" id="productName" name="productName" value="${product.name}">
-              
-              <div>
-                <label class="block mb-2">Your Name</label>
-                <input type="text" name="name" required 
-                  class="w-full px-4 py-2 rounded bg-gray-700 text-white">
-              </div>
-              <div>
-                <label class="block mb-2">Your Email</label>
-                <input type="email" name="email" required 
-                  class="w-full px-4 py-2 rounded bg-gray-700 text-white">
-              </div>
-              <div>
-                <label class="block mb-2">Message</label>
-                <textarea name="message" rows="4" 
-                  class="w-full px-4 py-2 rounded bg-gray-700 text-white"></textarea>
-              </div>
-              <button type="submit" 
-                class="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg text-white">
-                Send Enquiry
-              </button>
-            </form>
-          </div>
-        </div>
-      `;
-
-      // Init Swiper
-      new Swiper(".mySwiper", {
-        slidesPerView: 1.5,
-        spaceBetween: 20,
-        centeredSlides: true,
-        loop: true,
-        autoplay: { delay: 3000 },
-        breakpoints: {
-          640: { slidesPerView: 2.5 },
-          1024: { slidesPerView: 3.5 }
-        }
+      const specs = [
+        "Engine Power: 250 HP",
+        "Max Load: 15 Tons",
+        "Fuel Capacity: 300L",
+        "Hydraulic System: Advanced SmartFlow",
+        "Operator Comfort: Ergonomic cabin with A/C",
+        "Safety: 360° Cameras & Emergency Stop",
+      ];
+      const specList = document.getElementById("specList");
+      specs.forEach((s, i) => {
+        const li = document.createElement("li");
+        li.textContent = s;
+        li.className = "p-6 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-md";
+        specList.appendChild(li);
       });
-
-      // Sticky CTA → scroll to form
-      document.getElementById("stickyCTA").addEventListener("click", () => {
-        document.getElementById("enquiryForm").scrollIntoView({ behavior: "smooth" });
-      });
-
-      // Handle form
-      document.getElementById("enquiryFormElement").addEventListener("submit", (e) => {
-        e.preventDefault();
-        alert("✅ Thank you! Your enquiry for " + product.name + " has been sent.");
-      });
-
-      // Dark/Light mode toggle
-      document.getElementById("toggleTheme").addEventListener("click", () => {
-        const body = document.getElementById("body");
-        if (body.classList.contains("bg-gradient-to-br")) {
-          body.classList.remove("bg-gradient-to-br", "from-gray-900", "via-black", "to-gray-800", "text-gray-100");
-          body.classList.add("bg-white", "text-gray-900");
-        } else {
-          body.classList.add("bg-gradient-to-br", "from-gray-900", "via-black", "to-gray-800", "text-gray-100");
-          body.classList.remove("bg-white", "text-gray-900");
-        }
-      });
-
-      // Download Brochure
-      document.getElementById("downloadBrochure").addEventListener("click", () => {
-        const { jsPDF } = window.jspdf;
-        const doc = new jsPDF();
-
-        doc.setFontSize(20);
-        doc.text(product.name + " - Product Brochure", 20, 20);
-
-        doc.setFontSize(12);
-        doc.text("Description:", 20, 40);
-        doc.text(product.description, 20, 50, { maxWidth: 170 });
-
-        doc.text("Specifications:", 20, 80);
-        const specsList = document.querySelectorAll("#specList li");
-        let y = 90;
-        specsList.forEach((spec) => {
-          doc.text("• " + spec.innerText, 25, y);
-          y += 10;
-        });
-
-        doc.save(product.name.replace(/\s+/g, "_") + "_brochure.pdf");
-      });
-    } else {
-      document.getElementById("productDetails").innerHTML = `
-        <h1 class="text-3xl font-bold text-red-400">Product not found</h1>
-      `;
     }
+
+    document.getElementById("enquireNow").addEventListener("click", () => {
+      document.getElementById("enquiryForm").scrollIntoView({ behavior: "smooth" });
+    });
+
+    // Brochure
+    document.getElementById("downloadBrochure").addEventListener("click", () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF("p", "mm", "a4");
+      const primary = [30, 64, 175];
+      const dark = [20, 20, 20];
+      doc.setFillColor(...primary);
+      doc.rect(0, 0, 210, 40, "F");
+      doc.setFontSize(18);
+      doc.setTextColor(255, 255, 255);
+      doc.text("MachineCo", 20, 25);
+      doc.setFontSize(22);
+      doc.setTextColor(...dark);
+      doc.text(product.name, 20, 60);
+      doc.setFontSize(12);
+      doc.text("Description:", 20, 75);
+      doc.text(product.description, 20, 85, { maxWidth: 170 });
+      doc.save(product.name.replace(/\s+/g, "_") + "_brochure.pdf");
+    });
+
+    // Parallax + fade/zoom
+    window.addEventListener("scroll", () => {
+      const y = window.scrollY * 0.4;
+      document.querySelector(".parallax-bg").style.setProperty("--scroll", y + "px");
+
+      document.querySelectorAll(".fade-zoom").forEach(el => {
+        const rect = el.getBoundingClientRect();
+        if (rect.top < window.innerHeight * 0.8) {
+          el.classList.add("visible");
+        }
+      });
+    });
   </script>
 </body>
 </html>
