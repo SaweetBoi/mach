@@ -6,6 +6,7 @@
   <title>Product Details | MachineCo</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <script src="product.js"></script>
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
 </head>
 <body class="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-gray-100">
 
@@ -22,35 +23,42 @@
   </nav>
 
   <!-- Product Details -->
-  <main class="max-w-5xl mx-auto px-6 py-32">
+  <main class="max-w-6xl mx-auto px-6 py-32">
     <div id="productDetails" class="text-center"></div>
   </main>
 
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
+    AOS.init();
+
     const params = new URLSearchParams(window.location.search);
     const productId = params.get("id");
     const product = products[productId];
 
     if (product) {
-      // Generate fake specs (later you can make these real in product.js)
-      const specs = `
-        <ul class="text-left list-disc list-inside space-y-2 mb-8">
-          <li><strong>Power:</strong> ${Math.floor(Math.random() * 500) + 100} HP</li>
-          <li><strong>Weight:</strong> ${Math.floor(Math.random() * 30) + 10} tons</li>
-          <li><strong>Fuel Type:</strong> Diesel</li>
-          <li><strong>Capacity:</strong> ${Math.floor(Math.random() * 20) + 5} m³</li>
-        </ul>
+      let specsHtml = `
+        <h2 class="text-2xl font-semibold mb-6">Specifications</h2>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-12">
       `;
+
+      product.specs.forEach((spec, i) => {
+        specsHtml += `
+          <div data-aos="fade-up" data-aos-delay="${i * 100}" 
+               class="bg-gray-800 p-4 rounded-lg shadow hover:shadow-xl transition">
+            <p class="text-blue-400 font-bold">${spec.label}</p>
+            <p class="text-lg">${spec.value}</p>
+          </div>
+        `;
+      });
+
+      specsHtml += `</div>`;
 
       document.getElementById("productDetails").innerHTML = `
         <h1 class="text-4xl font-extrabold mb-6">${product.name}</h1>
         <img src="${product.image}" alt="${product.name}" 
-             class="w-full max-w-3xl mx-auto rounded-lg shadow-lg mb-6">
+             class="w-full max-w-3xl mx-auto rounded-lg shadow-lg mb-6" data-aos="zoom-in">
         <p class="text-lg text-gray-300 mb-8">${product.description}</p>
-
-        <h2 class="text-2xl font-semibold mb-4">Specifications</h2>
-        ${specs}
-
+        ${specsHtml}
         <div class="mt-8">
           <button id="enquireBtn" 
             class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
