@@ -1,0 +1,16 @@
+/* Custom styles + subtle transitions */
+html {
+  scroll-behavior: smooth;
+}
+
+section {
+  transition: all 0.6s ease-in-out;
+}
+
+nav a {
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: #2563eb; /* Tailwind blue-600 */
+}
