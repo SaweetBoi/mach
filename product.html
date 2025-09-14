@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Details</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Product - MachineCo</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link rel="stylesheet" href="style.css">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
   <style>
+    .parallax-bg {
+      transform: translateY(var(--scroll, 0));
+      transition: transform 0.1s linear;
+    }
     .fade-zoom {
       opacity: 0;
       transform: scale(0.95);
-      transition: all 0.6s ease-out;
+      transition: opacity 0.8s ease, transform 0.8s ease;
     }
     .fade-zoom.visible {
       opacity: 1;
@@ -18,97 +24,140 @@
     }
   </style>
 </head>
-<body class="bg-white text-gray-900">
+<body class="bg-gray-50 text-gray-900 dark:bg-gray-900 dark:text-gray-100">
+
+  <!-- Navbar -->
+  <nav class="bg-white/80 dark:bg-gray-800/80 backdrop-blur-md fixed w-full top-0 z-50 shadow">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-blue-600">MachineCo</h1>
+      <a href="products.html" class="text-gray-700 dark:text-gray-200 hover:text-blue-600">Back to Products</a>
+    </div>
+  </nav>
 
   <!-- Hero Section -->
-  <section class="relative h-screen flex items-center justify-center text-center">
-    <!-- Background Video -->
-    <video id="productVideo" autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover"></video>
-
-    <!-- Fallback Background -->
-    <img id="productImage" alt="Product background" class="absolute inset-0 w-full h-full object-cover hidden">
-
-    <!-- Overlay -->
+  <section class="relative h-screen flex items-center justify-center text-center overflow-hidden">
+    <div id="heroBackground" class="absolute inset-0 w-full h-full parallax-bg"></div>
     <div class="absolute inset-0 bg-black/50"></div>
-
-    <!-- Content -->
-    <div id="heroContent" class="relative z-10 max-w-3xl px-6 fade-zoom">
+    <div id="heroContent" class="relative z-10 max-w-3xl px-6" data-aos="fade-up">
       <h2 id="productName" class="text-4xl md:text-6xl font-bold text-white mb-6"></h2>
       <p id="productDescription" class="text-lg text-gray-200 opacity-90 mb-8"></p>
-      <div class="flex justify-center space-x-4">
-        <a id="enquireNow" href="#enquirySection" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <button id="enquireNow" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
           Enquire Now
-        </a>
-        <a id="downloadBrochure" href="#" target="_blank" class="px-6 py-3 bg-white/90 text-gray-900 font-semibold rounded-lg hover:bg-gray-200 transition">
+        </button>
+        <button id="downloadBrochure" class="px-6 py-3 bg-white/90 text-gray-900 font-semibold rounded-lg hover:bg-gray-200 transition">
           Download Brochure
-        </a>
+        </button>
       </div>
     </div>
   </section>
 
   <!-- Specifications -->
-  <section class="py-20 bg-gray-100">
-    <div class="max-w-4xl mx-auto text-center mb-12">
-      <h3 class="text-3xl font-bold">Specifications</h3>
+  <section id="specSection" class="py-20 bg-white dark:bg-gray-800 fade-zoom">
+    <div class="max-w-6xl mx-auto px-6">
+      <h3 class="text-3xl font-bold mb-12 text-center">Specifications</h3>
+      <ul id="specList" class="grid md:grid-cols-2 gap-10"></ul>
     </div>
-    <ul id="specList" class="max-w-4xl mx-auto grid md:grid-cols-2 gap-6 px-6"></ul>
   </section>
 
-  <!-- Enquiry Section -->
-  <section id="enquirySection" class="py-20 bg-white">
-    <div class="max-w-2xl mx-auto text-center">
-      <h3 class="text-3xl font-bold mb-6">Enquire About This Product</h3>
-      <form id="enquiryForm" class="space-y-4">
-        <input type="text" placeholder="Your Name" required class="w-full px-4 py-2 border rounded">
-        <input type="email" placeholder="Your Email" required class="w-full px-4 py-2 border rounded">
-        <textarea placeholder="Your Message" required class="w-full px-4 py-2 border rounded"></textarea>
-        <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">Send Enquiry</button>
+  <!-- Highlights Carousel -->
+  <section class="py-20 bg-gray-100 dark:bg-gray-700 fade-zoom">
+    <div class="max-w-6xl mx-auto px-6 text-center">
+      <h3 class="text-3xl font-bold mb-12">Key Highlights</h3>
+      <div class="flex overflow-x-auto space-x-6 snap-x snap-mandatory pb-4">
+        <div class="min-w-[250px] bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 snap-center">
+          <h4 class="font-semibold text-xl mb-2">Heavy-Duty Build</h4>
+          <p>Durable steel frame and components designed for industrial strength.</p>
+        </div>
+        <div class="min-w-[250px] bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 snap-center">
+          <h4 class="font-semibold text-xl mb-2">Fuel Efficient</h4>
+          <p>Smart engine system reduces fuel consumption by 15%.</p>
+        </div>
+        <div class="min-w-[250px] bg-white dark:bg-gray-900 shadow-lg rounded-lg p-6 snap-center">
+          <h4 class="font-semibold text-xl mb-2">Smart Controls</h4>
+          <p>Intuitive digital control panel with real-time diagnostics.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Enquiry Form -->
+  <section id="enquiryForm" class="py-20 bg-gray-200 dark:bg-gray-800 fade-zoom">
+    <div class="max-w-4xl mx-auto text-center">
+      <h2 class="text-3xl font-bold mb-8">Enquire About This Product</h2>
+      <form class="space-y-6 bg-white dark:bg-gray-900 shadow-lg p-8 rounded-lg">
+        <input type="text" placeholder="Your Name" class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-600" required>
+        <input type="email" placeholder="Your Email" class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-600" required>
+        <input id="productField" type="text" readonly class="w-full p-4 border rounded-lg bg-gray-100 text-gray-700 dark:bg-gray-700 dark:text-gray-300" />
+        <textarea placeholder="Your Message" class="w-full p-4 border rounded-lg focus:ring-2 focus:ring-blue-600" rows="5"></textarea>
+        <button type="submit" class="px-6 py-3 bg-blue-600 text-white font-semibold rounded-lg hover:bg-blue-700 transition">
+          Send Enquiry
+        </button>
       </form>
     </div>
   </section>
 
-  <!-- Scripts -->
   <script src="product.js"></script>
   <script>
-    // Get product ID from URL
-    const urlParams = new URLSearchParams(window.location.search);
-    const productId = parseInt(urlParams.get("id"));
-    const product = products.find(p => p.id === productId);
+    AOS.init();
+
+    const params = new URLSearchParams(window.location.search);
+    const key = params.get("id");
+    const product = products[key];
 
     if (product) {
       document.getElementById("productName").textContent = product.name;
       document.getElementById("productDescription").textContent = product.description;
-      document.getElementById("productImage").src = product.image;
-      document.getElementById("downloadBrochure").href = product.brochure;
+      document.getElementById("productField").value = "Product: " + product.name;
 
-      const videoEl = document.getElementById("productVideo");
+      const heroBg = document.getElementById("heroBackground");
       if (product.video) {
-        const src = document.createElement("source");
-        src.src = product.video;
-        src.type = "video/mp4";
-        videoEl.appendChild(src);
-        videoEl.onerror = () => {
-          videoEl.classList.add("hidden");
-          document.getElementById("productImage").classList.remove("hidden");
-        };
+        heroBg.innerHTML = `
+          <video autoplay muted loop playsinline class="w-full h-full object-cover">
+            <source src="${product.video}" type="video/mp4">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">
+          </video>`;
       } else {
-        videoEl.classList.add("hidden");
-        document.getElementById("productImage").classList.remove("hidden");
+        heroBg.innerHTML = `<img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover">`;
       }
 
-      // Add specs
       const specList = document.getElementById("specList");
       product.specs.forEach((s, i) => {
         const li = document.createElement("li");
         li.textContent = s;
-        li.className = "p-6 bg-white rounded-lg shadow-md opacity-0 translate-y-6 transition duration-700 ease-out";
+        li.className = "p-6 bg-gray-100 dark:bg-gray-900 rounded-lg shadow-md opacity-0 translate-y-6 transition duration-700 ease-out";
         li.style.transitionDelay = `${i * 150}ms`;
         specList.appendChild(li);
       });
     }
 
-    // Scroll animations
+    document.getElementById("enquireNow").addEventListener("click", () => {
+      document.getElementById("enquiryForm").scrollIntoView({ behavior: "smooth" });
+    });
+
+    document.getElementById("downloadBrochure").addEventListener("click", () => {
+      const { jsPDF } = window.jspdf;
+      const doc = new jsPDF("p", "mm", "a4");
+      const primary = [30, 64, 175];
+      const dark = [20, 20, 20];
+      doc.setFillColor(...primary);
+      doc.rect(0, 0, 210, 40, "F");
+      doc.setFontSize(18);
+      doc.setTextColor(255, 255, 255);
+      doc.text("MachineCo", 20, 25);
+      doc.setFontSize(22);
+      doc.setTextColor(...dark);
+      doc.text(product.name, 20, 60);
+      doc.setFontSize(12);
+      doc.text("Description:", 20, 75);
+      doc.text(product.description, 20, 85, { maxWidth: 170 });
+      doc.save(product.name.replace(/\s+/g, "_") + "_brochure.pdf");
+    });
+
     window.addEventListener("scroll", () => {
+      const y = window.scrollY * 0.4;
+      document.querySelector(".parallax-bg").style.setProperty("--scroll", y + "px");
+
       document.querySelectorAll(".fade-zoom").forEach(el => {
         const rect = el.getBoundingClientRect();
         if (rect.top < window.innerHeight * 0.8) {
@@ -123,13 +172,6 @@
           el.classList.add("opacity-100", "translate-y-0");
         }
       });
-    });
-
-    // Enquiry form handler
-    document.getElementById("enquiryForm").addEventListener("submit", (e) => {
-      e.preventDefault();
-      alert(`Your enquiry about "${product.name}" has been sent!`);
-      e.target.reset();
     });
   </script>
 </body>
