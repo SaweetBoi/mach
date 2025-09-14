@@ -3,119 +3,221 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MachineCo | Industrial Machinery</title>
+  <title>MachineCo | Heavy Machinery</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
   <style>
-    /* Smooth fade-in for hero */
-    .fade-in {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 1.2s ease-out forwards;
-    }
-    .fade-in-delay {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 1.2s ease-out forwards;
-      animation-delay: 0.5s;
-    }
-    .fade-in-delay-2 {
-      opacity: 0;
-      transform: translateY(30px);
-      animation: fadeInUp 1.2s ease-out forwards;
-      animation-delay: 1s;
-    }
-    @keyframes fadeInUp {
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .tilt-card {
+      position: relative;
+      transform-style: preserve-3d;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
 
-    /* Navbar hide on top, reveal on scroll */
-    .navbar-hidden {
-      transform: translateY(-100%);
-      transition: transform 0.4s ease-in-out;
+    /* Shine effect overlay */
+    .tilt-shine {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      background: radial-gradient(circle at center, rgba(255,255,255,0.25), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.2s ease, background 0.2s ease;
+      border-radius: inherit;
     }
-    .navbar-visible {
-      transform: translateY(0);
-      transition: transform 0.4s ease-in-out;
+
+    .tilt-card:hover .tilt-shine {
+      opacity: 1;
     }
   </style>
 </head>
 <body class="bg-black text-white font-sans">
-
-  <!-- Navbar -->
-  <header id="navbar" class="navbar-hidden fixed w-full bg-black bg-opacity-90 backdrop-blur-md z-50 shadow-md">
-    <div class="max-w-7xl mx-auto flex justify-between items-center p-4">
-      <h1 class="text-2xl font-bold">MachineCo</h1>
-      <nav class="space-x-6 text-gray-300">
-        <a href="index.html" class="hover:text-white transition">Home</a>
-        <a href="#products" class="hover:text-white transition">Products</a>
-        <a href="#about" class="hover:text-white transition">About</a>
-        <a href="#contact" class="hover:text-white transition">Contact</a>
-      </nav>
-    </div>
+  <!-- Hero -->
+  <header class="text-center py-20 bg-gradient-to-b from-gray-900 to-black">
+    <h1 class="text-5xl md:text-7xl font-extrabold mb-6">MachineCo</h1>
+    <p class="text-gray-400 text-lg md:text-xl max-w-2xl mx-auto">Innovating the future of heavy machinery. Power, performance, and reliability in every machine.</p>
   </header>
 
-  <!-- Hero -->
-  <section class="relative h-[90vh] flex flex-col items-center justify-center text-center bg-cover bg-center" 
-           style="background-image: url('https://images.unsplash.com/photo-1581091870627-3b2f1e0eec7f?auto=format&fit=crop&w=1600&q=80');">
-    <div class="absolute inset-0 bg-black bg-opacity-70"></div>
-    <div class="relative z-10 px-4">
-      <h2 class="text-5xl md:text-6xl font-extrabold mb-6 fade-in">Powering Industries with Precision</h2>
-      <p class="text-lg md:text-xl text-gray-300 mb-8 fade-in-delay">High-performance machinery engineered for tomorrow’s challenges.</p>
-      <a href="#products" class="bg-white text-black px-6 py-3 rounded-xl text-lg font-semibold hover:bg-gray-300 transition fade-in-delay-2">Explore Products</a>
-    </div>
-  </section>
+  <!-- Products Grid -->
+  <section class="max-w-7xl mx-auto px-6 py-20">
+    <h2 class="text-4xl font-bold mb-12 text-center">Our Machines</h2>
 
-  <!-- Products -->
-  <main id="products" class="max-w-7xl mx-auto p-8">
-    <h2 class="text-4xl font-bold mb-12 text-center" data-aos="fade-up">Our Products</h2>
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10">
-      <!-- (keep your product cards here, same as before) -->
+      
+      <!-- Forklift -->
+      <a href="product.html?id=forklift" 
+         class="tilt-card group bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl transition-transform duration-300"
+         data-aos="fade-up">
+        <div class="tilt-shine"></div>
+        <div class="overflow-hidden rounded-xl mb-4">
+          <img src="https://images.unsplash.com/photo-1592928302369-91fa4b404585?auto=format&fit=crop&w=800&q=80" 
+               alt="Forklift" 
+               class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+        </div>
+        <h3 class="text-2xl font-bold">Forklift X200</h3>
+        <p class="text-gray-400">Heavy-duty warehouse forklift</p>
+      </a>
+
+      <!-- Crane -->
+      <a href="product.html?id=crane" 
+         class="tilt-card group bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl"
+         data-aos="fade-up" data-aos-delay="100">
+        <div class="tilt-shine"></div>
+        <div class="overflow-hidden rounded-xl mb-4">
+          <img src="https://images.unsplash.com/photo-1556761175-4b46a572b786?auto=format&fit=crop&w=800&q=80" 
+               alt="Crane" 
+               class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+        </div>
+        <h3 class="text-2xl font-bold">Crane Titan 500</h3>
+        <p class="text-gray-400">Industrial tower crane</p>
+      </a>
+
+      <!-- Excavator -->
+      <a href="product.html?id=excavator" 
+         class="tilt-card group bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl"
+         data-aos="fade-up" data-aos-delay="200">
+        <div class="tilt-shine"></div>
+        <div class="overflow-hidden rounded-xl mb-4">
+          <img src="https://images.unsplash.com/photo-1625649314944-28a7a8b5d01b?auto=format&fit=crop&w=800&q=80" 
+               alt="Excavator" 
+               class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+        </div>
+        <h3 class="text-2xl font-bold">Excavator EX90</h3>
+        <p class="text-gray-400">Dig deeper, faster</p>
+      </a>
+
+      <!-- Bulldozer -->
+      <a href="product.html?id=bulldozer" 
+         class="tilt-card group bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl"
+         data-aos="fade-up" data-aos-delay="300">
+        <div class="tilt-shine"></div>
+        <div class="overflow-hidden rounded-xl mb-4">
+          <img src="https://images.unsplash.com/photo-1611095965826-568f26dfec66?auto=format&fit=crop&w=800&q=80" 
+               alt="Bulldozer" 
+               class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+        </div>
+        <h3 class="text-2xl font-bold">Bulldozer D7</h3>
+        <p class="text-gray-400">Push limits with raw power</p>
+      </a>
+
+      <!-- Loader -->
+      <a href="product.html?id=loader" 
+         class="tilt-card group bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl"
+         data-aos="fade-up" data-aos-delay="400">
+        <div class="tilt-shine"></div>
+        <div class="overflow-hidden rounded-xl mb-4">
+          <img src="https://images.unsplash.com/photo-1625649314797-c024d1d9f1bb?auto=format&fit=crop&w=800&q=80" 
+               alt="Loader" 
+               class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+        </div>
+        <h3 class="text-2xl font-bold">Wheel Loader L350</h3>
+        <p class="text-gray-400">Massive loads, minimal effort</p>
+      </a>
+
+      <!-- Dump Truck -->
+      <a href="product.html?id=dumptruck" 
+         class="tilt-card group bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl"
+         data-aos="fade-up" data-aos-delay="500">
+        <div class="tilt-shine"></div>
+        <div class="overflow-hidden rounded-xl mb-4">
+          <img src="https://images.unsplash.com/photo-1581091870627-3b2f1e0eec7f?auto=format&fit=crop&w=800&q=80" 
+               alt="Dump Truck" 
+               class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+        </div>
+        <h3 class="text-2xl font-bold">Dump Truck DT900</h3>
+        <p class="text-gray-400">Carry the load with confidence</p>
+      </a>
+
+      <!-- Road Roller -->
+      <a href="product.html?id=roadroller" 
+         class="tilt-card group bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl"
+         data-aos="fade-up" data-aos-delay="600">
+        <div class="tilt-shine"></div>
+        <div class="overflow-hidden rounded-xl mb-4">
+          <img src="https://images.unsplash.com/photo-1593642633279-1796119d5482?auto=format&fit=crop&w=800&q=80" 
+               alt="Road Roller" 
+               class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+        </div>
+        <h3 class="text-2xl font-bold">Road Roller RR700</h3>
+        <p class="text-gray-400">Smooth roads, guaranteed</p>
+      </a>
+
+      <!-- Backhoe -->
+      <a href="product.html?id=backhoe" 
+         class="tilt-card group bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl"
+         data-aos="fade-up" data-aos-delay="700">
+        <div class="tilt-shine"></div>
+        <div class="overflow-hidden rounded-xl mb-4">
+          <img src="https://images.unsplash.com/photo-1625649314946-51f9b8a2a2bb?auto=format&fit=crop&w=800&q=80" 
+               alt="Backhoe" 
+               class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+        </div>
+        <h3 class="text-2xl font-bold">Backhoe Loader BHX50</h3>
+        <p class="text-gray-400">Versatility redefined</p>
+      </a>
+
+      <!-- Skid Steer -->
+      <a href="product.html?id=skidsteer" 
+         class="tilt-card group bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl"
+         data-aos="fade-up" data-aos-delay="800">
+        <div class="tilt-shine"></div>
+        <div class="overflow-hidden rounded-xl mb-4">
+          <img src="https://images.unsplash.com/photo-1600741741302-9f0e5e2cf63f?auto=format&fit=crop&w=800&q=80" 
+               alt="Skid Steer" 
+               class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+        </div>
+        <h3 class="text-2xl font-bold">Skid Steer S150</h3>
+        <p class="text-gray-400">Small but mighty</p>
+      </a>
+
+      <!-- Telehandler -->
+      <a href="product.html?id=telehandler" 
+         class="tilt-card group bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-2xl"
+         data-aos="fade-up" data-aos-delay="900">
+        <div class="tilt-shine"></div>
+        <div class="overflow-hidden rounded-xl mb-4">
+          <img src="https://images.unsplash.com/photo-1581090700227-4c1c7e1b05a2?auto=format&fit=crop&w=800&q=80" 
+               alt="Telehandler" 
+               class="w-full h-56 object-cover group-hover:scale-110 transition-transform duration-500">
+        </div>
+        <h3 class="text-2xl font-bold">Telehandler TH330</h3>
+        <p class="text-gray-400">Reach new heights</p>
+      </a>
+
     </div>
-  </main>
-
-  <!-- About -->
-  <section id="about" class="max-w-5xl mx-auto p-12 text-center" data-aos="fade-up">
-    <h2 class="text-3xl font-bold mb-4">About Us</h2>
-    <p class="text-gray-400 leading-relaxed">
-      At MachineCo, we engineer industrial machines that push the limits of performance and reliability. 
-      Our mission is to empower industries with tools that transform the way they build, move, and innovate.
-    </p>
   </section>
 
-  <!-- Contact -->
-  <section id="contact" class="max-w-5xl mx-auto p-12 text-center" data-aos="fade-up">
-    <h2 class="text-3xl font-bold mb-4">Contact Us</h2>
-    <p class="text-gray-400 mb-6">Have questions or need custom machinery? Let’s talk.</p>
-    <a href="mailto:info@machineco.com" class="bg-white text-black px-6 py-3 rounded-xl text-lg font-semibold hover:bg-gray-300 transition">Email Us</a>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-gray-900 py-6 mt-12 text-center text-gray-500 text-sm">
-    © 2025 MachineCo. All rights reserved.
-  </footer>
-
-  <!-- Scripts -->
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
     AOS.init();
 
-    // Navbar scroll reveal
-    const navbar = document.getElementById('navbar');
-    let lastScrollY = 0;
+    // Interactive Tilt + Shine
+    document.querySelectorAll(".tilt-card").forEach(card => {
+      const shine = card.querySelector(".tilt-shine");
 
-    window.addEventListener('scroll', () => {
-      if (window.scrollY > 50) {
-        navbar.classList.remove('navbar-hidden');
-        navbar.classList.add('navbar-visible');
-      } else {
-        navbar.classList.remove('navbar-visible');
-        navbar.classList.add('navbar-hidden');
-      }
-      lastScrollY = window.scrollY;
+      card.addEventListener("mousemove", (e) => {
+        const rect = card.getBoundingClientRect();
+        const x = e.clientX - rect.left;
+        const y = e.clientY - rect.top;
+        const centerX = rect.width / 2;
+        const centerY = rect.height / 2;
+
+        const rotateX = ((y - centerY) / centerY) * 10;
+        const rotateY = ((x - centerX) / centerX) * -10;
+
+        card.style.transform = `rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
+
+        // Shine effect
+        const percentX = (x / rect.width) * 100;
+        const percentY = (y / rect.height) * 100;
+        shine.style.background = `radial-gradient(circle at ${percentX}% ${percentY}%, rgba(255,255,255,0.35), transparent 60%)`;
+      });
+
+      card.addEventListener("mouseleave", () => {
+        card.style.transform = "rotateX(0) rotateY(0) scale(1)";
+        shine.style.background = "none";
+      });
     });
   </script>
 </body>
