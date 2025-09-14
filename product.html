@@ -8,6 +8,7 @@
   <script src="product.js"></script>
 </head>
 <body class="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-gray-100">
+
   <!-- Navbar -->
   <nav class="bg-gray-900 bg-opacity-90 fixed w-full z-20">
     <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
@@ -31,11 +32,24 @@
     const product = products[productId];
 
     if (product) {
+      // Generate fake specs (later you can make these real in product.js)
+      const specs = `
+        <ul class="text-left list-disc list-inside space-y-2 mb-8">
+          <li><strong>Power:</strong> ${Math.floor(Math.random() * 500) + 100} HP</li>
+          <li><strong>Weight:</strong> ${Math.floor(Math.random() * 30) + 10} tons</li>
+          <li><strong>Fuel Type:</strong> Diesel</li>
+          <li><strong>Capacity:</strong> ${Math.floor(Math.random() * 20) + 5} m³</li>
+        </ul>
+      `;
+
       document.getElementById("productDetails").innerHTML = `
         <h1 class="text-4xl font-extrabold mb-6">${product.name}</h1>
         <img src="${product.image}" alt="${product.name}" 
              class="w-full max-w-3xl mx-auto rounded-lg shadow-lg mb-6">
         <p class="text-lg text-gray-300 mb-8">${product.description}</p>
+
+        <h2 class="text-2xl font-semibold mb-4">Specifications</h2>
+        ${specs}
 
         <div class="mt-8">
           <button id="enquireBtn" 
