@@ -3,73 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>MachineCo | Industrial Machines</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <title>MachineCo Catalogue</title>
+  <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-gray-50 text-gray-900">
+<body class="bg-black text-white font-sans">
+  <header class="p-6 bg-gray-900 shadow-lg">
+    <h1 class="text-3xl font-bold">MachineCo</h1>
+  </header>
 
-  <!-- Navbar -->
-  <nav class="fixed top-0 left-0 w-full bg-white shadow z-50">
-    <div class="max-w-7xl mx-auto flex justify-between items-center px-6 py-4">
-      <h1 class="text-2xl font-bold tracking-tight">MachineCo</h1>
-      <ul class="hidden md:flex space-x-6 font-medium">
-        <li><a href="#home" class="hover:text-blue-600">Home</a></li>
-        <li><a href="#products" class="hover:text-blue-600">Products</a></li>
-        <li><a href="#about" class="hover:text-blue-600">About</a></li>
-        <li><a href="#contact" class="hover:text-blue-600">Contact</a></li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Hero Section -->
-  <section id="home" class="h-screen flex items-center justify-center bg-gray-900 text-white relative">
-    <div class="text-center px-6">
-      <h2 class="text-5xl md:text-6xl font-bold mb-6">Heavy Machines, Built Strong</h2>
-      <p class="text-lg mb-6">Reliable forklifts, cranes, and industrial solutions engineered for power.</p>
-      <a href="#products" class="px-6 py-3 bg-blue-600 rounded-lg shadow hover:bg-blue-700 transition">Explore Products</a>
-    </div>
-  </section>
-
-  <!-- Products -->
-  <section id="products" class="py-20 bg-gray-100">
-    <div class="max-w-7xl mx-auto px-6">
-      <h3 class="text-4xl font-bold text-center mb-12">Our Products</h3>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
-        <!-- Product Card -->
-        <div class="bg-white p-6 rounded-xl shadow hover:shadow-xl transition">
-          <img src="images/forklift1.jpg" alt="Forklift" class="rounded mb-4">
-          <h4 class="text-xl font-semibold mb-2">Forklift X200</h4>
-          <p class="text-gray-600">High capacity forklift for industrial warehouses.</p>
+  <main class="max-w-6xl mx-auto p-8">
+    <h2 class="text-4xl font-bold mb-8">Our Products</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <a href="product.html?id=forklift" class="group block">
+        <div class="bg-gray-900 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+          <img src="images/forklift.jpg" class="rounded-xl w-full h-48 object-cover group-hover:opacity-90">
+          <h3 class="text-xl font-bold mt-4">Forklift</h3>
+          <p class="text-gray-400">Heavy-duty warehouse forklift</p>
         </div>
-      </div>
-    </div>
-  </section>
+      </a>
 
-  <!-- About -->
-  <section id="about" class="py-20 bg-white">
-    <div class="max-w-5xl mx-auto px-6 text-center">
-      <h3 class="text-4xl font-bold mb-6">About Us</h3>
-      <p class="text-gray-700 leading-relaxed">
-        MachineCo has been designing and manufacturing industrial machinery for over 20 years.
-        Our mission is to provide reliable and innovative solutions that empower industries worldwide.
-      </p>
+      <a href="product.html?id=crane" class="group block">
+        <div class="bg-gray-900 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+          <img src="images/crane.jpg" class="rounded-xl w-full h-48 object-cover group-hover:opacity-90">
+          <h3 class="text-xl font-bold mt-4">Crane</h3>
+          <p class="text-gray-400">Industrial lifting crane</p>
+        </div>
+      </a>
     </div>
-  </section>
+  </main>
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>MachineCo Catalogue</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-black text-white font-sans">
+  <header class="p-6 bg-gray-900 shadow-lg">
+    <h1 class="text-3xl font-bold">MachineCo</h1>
+  </header>
 
-  <!-- Contact -->
-  <section id="contact" class="py-20 bg-gray-900 text-white">
-    <div class="max-w-4xl mx-auto px-6">
-      <h3 class="text-4xl font-bold text-center mb-8">Contact Us</h3>
-      <form class="grid grid-cols-1 gap-6">
-        <input type="text" placeholder="Your Name" class="p-4 rounded bg-gray-800 border border-gray-700">
-        <input type="email" placeholder="Your Email" class="p-4 rounded bg-gray-800 border border-gray-700">
-        <textarea placeholder="Your Message" rows="5" class="p-4 rounded bg-gray-800 border border-gray-700"></textarea>
-        <button type="submit" class="px-6 py-3 bg-blue-600 rounded shadow hover:bg-blue-700 transition">Send Message</button>
-      </form>
+  <main class="max-w-6xl mx-auto p-8">
+    <h2 class="text-4xl font-bold mb-8">Our Products</h2>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <a href="product.html?id=forklift" class="group block">
+        <div class="bg-gray-900 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+          <img src="images/forklift.jpg" class="rounded-xl w-full h-48 object-cover group-hover:opacity-90">
+          <h3 class="text-xl font-bold mt-4">Forklift</h3>
+          <p class="text-gray-400">Heavy-duty warehouse forklift</p>
+        </div>
+      </a>
+
+      <a href="product.html?id=crane" class="group block">
+        <div class="bg-gray-900 p-6 rounded-2xl shadow-lg hover:scale-105 transition">
+          <img src="images/crane.jpg" class="rounded-xl w-full h-48 object-cover group-hover:opacity-90">
+          <h3 class="text-xl font-bold mt-4">Crane</h3>
+          <p class="text-gray-400">Industrial lifting crane</p>
+        </div>
+      </a>
     </div>
-  </section>
-
-  <script src="script.js"></script>
+  </main>
 </body>
 </html>
