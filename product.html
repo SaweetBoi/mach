@@ -1,54 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Product - MachineCo</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details | MachineCo</title>
   <script src="https://cdn.tailwindcss.com"></script>
-  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet">
+  <script src="product.js"></script>
 </head>
-<body class="bg-gradient-to-br from-gray-900 via-gray-800 to-black text-gray-100">
+<body class="bg-gradient-to-br from-gray-900 via-black to-gray-800 text-gray-100">
   <!-- Navbar -->
-  <nav class="bg-black/70 backdrop-blur sticky top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+  <nav class="bg-gray-900 bg-opacity-90 fixed w-full z-20">
+    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
       <a href="index.html" class="text-2xl font-bold text-white">MachineCo</a>
       <div class="space-x-6">
         <a href="index.html" class="hover:text-blue-400">Home</a>
-        <a href="about.html" class="hover:text-blue-400">About Us</a>
+        <a href="products.html" class="hover:text-blue-400">Products</a>
         <a href="contact.html" class="hover:text-blue-400">Contact</a>
       </div>
     </div>
   </nav>
 
-  <!-- Product Detail -->
-  <main class="max-w-5xl mx-auto px-4 py-20">
-    <div id="product-detail" class="bg-gray-800 rounded-lg shadow-lg p-8" data-aos="fade-up"></div>
+  <!-- Product Details -->
+  <main class="max-w-5xl mx-auto px-6 py-32">
+    <div id="productDetails" class="text-center"></div>
   </main>
 
-  <!-- Footer -->
-  <footer class="bg-black text-gray-400 py-8 text-center" data-aos="fade-up">
-    <p>&copy; 2025 MachineCo. All rights reserved.</p>
-  </footer>
-
-  <script src="product.js"></script>
-  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js"></script>
   <script>
-    AOS.init({ duration: 1000, once: true });
-
     const params = new URLSearchParams(window.location.search);
-    const id = params.get("id");
-    const container = document.getElementById("product-detail");
+    const productId = params.get("id");
+    const product = products[productId];
 
-    if (id && products[id]) {
-      const p = products[id];
-      container.innerHTML = `
-        <h1 class="text-4xl font-bold mb-6">${p.name}</h1>
-        <img src="${p.image}" alt="${p.name}" class="w-full h-96 object-cover rounded mb-6">
-        <p class="text-gray-300 mb-6">${p.description}</p>
-        <a href="contact.html" class="inline-block bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Enquire Now</a>
+    if (product) {
+      document.getElementById("productDetails").innerHTML = `
+        <h1 class="text-4xl font-extrabold mb-6">${product.name}</h1>
+        <img src="${product.image}" alt="${product.name}" 
+             class="w-full max-w-3xl mx-auto rounded-lg shadow-lg mb-6">
+        <p class="text-lg text-gray-300 mb-8">${product.description}</p>
+
+        <div class="mt-8">
+          <button id="enquireBtn" 
+            class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium transition">
+            Enquire about this product
+          </button>
+
+          <!-- Hidden enquiry form -->
+          <div id="enquiryForm" class="mt-6 hidden">
+            <form id="enquiryFormElement" class="bg-gray-800 p-6 rounded-lg space-y-4 shadow-xl">
+              <h3 class="text-xl font-bold">Send us your enquiry</h3>
+              <input type="hidden" id="productName" name="productName" value="${product.name}">
+              
+              <div>
+                <label class="block mb-2">Your Name</label>
+                <input type="text" name="name" required 
+                  class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+              </div>
+              <div>
+                <label class="block mb-2">Your Email</label>
+                <input type="email" name="email" required 
+                  class="w-full px-4 py-2 rounded bg-gray-700 text-white">
+              </div>
+              <div>
+                <label class="block mb-2">Message</label>
+                <textarea name="message" rows="4" 
+                  class="w-full px-4 py-2 rounded bg-gray-700 text-white"></textarea>
+              </div>
+              <button type="submit" 
+                class="bg-green-600 hover:bg-green-700 px-6 py-2 rounded-lg text-white">
+                Send Enquiry
+              </button>
+            </form>
+          </div>
+        </div>
       `;
+
+      // Toggle enquiry form
+      document.getElementById("enquireBtn").addEventListener("click", () => {
+        document.getElementById("enquiryForm").classList.toggle("hidden");
+      });
+
+      // Handle form submission
+      document.getElementById("enquiryFormElement").addEventListener("submit", (e) => {
+        e.preventDefault();
+        alert("✅ Thank you! Your enquiry for " + product.name + " has been sent.");
+        document.getElementById("enquiryForm").classList.add("hidden");
+      });
     } else {
-      container.innerHTML = `<p class="text-red-400">Product not found.</p>`;
+      document.getElementById("productDetails").innerHTML = `
+        <h1 class="text-3xl font-bold text-red-400">Product not found</h1>
+      `;
     }
   </script>
 </body>
