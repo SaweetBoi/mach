@@ -1,15 +1,55 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Product Details | MachineCo</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Product • MachineCo</title>
+
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://unpkg.com/aos@2.3.4/dist/aos.css" rel="stylesheet" />
+  <script src="https://unpkg.com/aos@2.3.4/dist/aos.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+
+  <link rel="stylesheet" href="style.css" />
   <script src="script.js" defer></script>
 </head>
-<body class="bg-black text-white font-sans">
-  <div id="product-container" class="max-w-5xl mx-auto p-8">
-    <!-- JS will inject product details here -->
-  </div>
+<body class="bg-white text-gray-900 antialiased">
+
+  <header class="p-6 bg-white border-b sticky top-0 z-40">
+    <div class="max-w-6xl mx-auto flex items-center justify-between px-4">
+      <a href="index.html" class="inline-flex items-center gap-3">
+        <img src="images/logo-placeholder.png" alt="MachineCo" class="h-8 w-8 object-contain">
+        <span class="font-semibold">MachineCo</span>
+      </a>
+      <nav class="hidden md:flex gap-6 text-sm">
+        <a href="index.html">Home</a>
+        <a href="index.html#products">Products</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="product-container" class="max-w-6xl mx-auto px-6 py-16">
+    <!-- Product content injected by script.js -->
+    <div class="text-center text-gray-500">Loading product…</div>
+  </main>
+
+  <footer class="bg-gray-100 text-gray-600 py-8">
+    <div class="max-w-6xl mx-auto px-6 text-center">© <span id="year2"></span> MachineCo</div>
+  </footer>
+
+  <script>
+    document.getElementById('year2').textContent = new Date().getFullYear();
+
+    // Wait for script.js product rendering
+    document.addEventListener('DOMContentLoaded', () => {
+      const interval = setInterval(() => {
+        if (window.renderProduct) {
+          clearInterval(interval);
+          renderProduct();
+          if (window.AOS) AOS.init({ duration: 800, once: true });
+        }
+      }, 80);
+    });
+  </script>
 </body>
 </html>
