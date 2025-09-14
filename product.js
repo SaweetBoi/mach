@@ -3,7 +3,7 @@ const products = [
     id: 1,
     name: "Heavy Duty Forklift",
     description: "Engineered for maximum load efficiency and operator safety in industrial environments.",
-    image: "https://images.unsplash.com/photo-1618477461423-8cf93a8351d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "https://picsum.photos/id/1011/1600/900",
     video: "https://cdn.coverr.co/videos/coverr-industrial-worker-operating-a-machine-3627/1080p.mp4",
     specs: [
       "Engine Power: 250 HP",
@@ -19,7 +19,7 @@ const products = [
     id: 2,
     name: "Bulldozer X2",
     description: "A modern bulldozer built for construction and mining sites with cutting-edge hydraulics.",
-    image: "https://images.unsplash.com/photo-1581090700227-4c4fd4df2d1a?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "https://picsum.photos/id/1015/1600/900",
     video: "https://cdn.coverr.co/videos/coverr-excavator-on-a-construction-site-1080p.mp4",
     specs: [
       "Engine Power: 450 HP",
@@ -35,7 +35,7 @@ const products = [
     id: 3,
     name: "Excavator Pro 300",
     description: "Designed for digging and lifting with precision controls and maximum stability.",
-    image: "https://images.unsplash.com/photo-1504215680853-026ed2a45def?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80",
+    image: "https://picsum.photos/id/1024/1600/900",
     video: "https://cdn.coverr.co/videos/coverr-excavator-moving-earth-1080p.mp4",
     specs: [
       "Engine Power: 320 HP",
