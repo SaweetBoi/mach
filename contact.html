@@ -1,48 +1,37 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact | MachineCo</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Us - MachineCo</title>
   <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body class="bg-black text-white">
-
-  <!-- Navigation -->
-  <nav class="bg-black bg-opacity-70 fixed w-full top-0 z-50 backdrop-blur-lg">
-    <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="index.html" class="text-2xl font-extrabold tracking-wider">MachineCo</a>
-      <div class="space-x-6 hidden md:flex">
-        <a href="index.html" class="hover:text-gray-400 transition">Home</a>
-        <a href="index.html#products" class="hover:text-gray-400 transition">Products</a>
-        <a href="about.html" class="hover:text-gray-400 transition">About</a>
-        <a href="contact.html" class="hover:text-gray-400 transition">Contact</a>
+<body class="bg-gray-50 text-gray-900">
+  <!-- Navbar -->
+  <nav class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="index.html" class="text-2xl font-bold text-gray-800">MachineCo</a>
+      <div class="space-x-6">
+        <a href="index.html" class="hover:text-blue-600">Home</a>
+        <a href="about.html" class="hover:text-blue-600">About Us</a>
+        <a href="contact.html" class="hover:text-blue-600">Contact</a>
       </div>
     </div>
   </nav>
-  <div class="pt-20"></div>
 
   <!-- Contact Form -->
-  <section class="max-w-5xl mx-auto px-6 py-20">
-    <h1 class="text-5xl font-extrabold mb-10 text-center">Contact Us</h1>
-    <form class="bg-gray-800 p-8 rounded-lg shadow-lg space-y-6">
-      <input type="text" placeholder="Your Name" class="w-full p-4 rounded bg-gray-900 text-white">
-      <input type="email" placeholder="Your Email" class="w-full p-4 rounded bg-gray-900 text-white">
-      <textarea placeholder="Your Message" rows="5" class="w-full p-4 rounded bg-gray-900 text-white"></textarea>
-      <button type="submit" class="w-full bg-yellow-500 text-black font-bold py-3 rounded-lg hover:bg-yellow-400 transition">
-        Send Message
-      </button>
+  <main class="max-w-5xl mx-auto px-4 py-16">
+    <h1 class="text-4xl font-bold mb-6">Get in Touch</h1>
+    <form class="bg-white shadow-lg rounded-lg p-8 space-y-4">
+      <input type="text" placeholder="Your Name" class="w-full border px-4 py-2 rounded" required>
+      <input type="email" placeholder="Your Email" class="w-full border px-4 py-2 rounded" required>
+      <textarea placeholder="Your Message" class="w-full border px-4 py-2 rounded h-32" required></textarea>
+      <button type="submit" class="bg-blue-600 text-white px-6 py-3 rounded hover:bg-blue-700">Send Message</button>
     </form>
-
-    <div class="mt-12 text-center text-gray-400">
-      <p>Email: contact@machineco.com</p>
-      <p>Phone: +91-98765-43210</p>
-      <p>Address: Ahmedabad, India</p>
-    </div>
-  </section>
+  </main>
 
   <!-- Footer -->
-  <footer class="bg-gray-900 text-gray-400 text-center py-8 mt-20">
+  <footer class="bg-gray-900 text-gray-300 py-8 text-center">
     <p>&copy; 2025 MachineCo. All rights reserved.</p>
   </footer>
 </body>
